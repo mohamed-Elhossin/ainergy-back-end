@@ -2,18 +2,49 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\APIs\servicesController;
+use App\Http\Controllers\APIs\CategoryController;
+use App\Http\Controllers\APIs\CommintController;
+use App\Http\Controllers\User\ApiauthController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+// Public Path
+Route::prefix("user")->group(function () {
+    Route::post("register", [ApiauthController::class, 'register']);
+    Route::post("login", [ApiauthController::class, 'login']);
+});
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Private with Token
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get("logout", [ApiauthController::class, 'logout']);
+
+    Route::prefix("commint")->group(function () {
+        // get All
+        Route::get("/", [CommintController::class, 'index']);
+        Route::post("/", [CommintController::class, 'store']);
+        Route::delete("/{id}", [CommintController::class, 'destroy']);
+    });
+
+
+    Route::prefix("category")->group(function () {
+        // get All
+        Route::get("/", [CategoryController::class, 'index']);
+    });
+
+
+    Route::prefix("services")->group(function () {
+        // get All
+        Route::get("/", [servicesController::class, 'index']);
+        // get One Services
+        Route::get("/{id}", [servicesController::class, 'show']);
+        //  Get by Category ID
+        Route::get("categoryId/{id}", [servicesController::class, 'listServiceByCategory']);
+        // Create Services
+        Route::post("/", [servicesController::class, 'store']);
+        // Update
+        Route::post("/{id}", [servicesController::class, 'update']);
+
+        // Delete
+        Route::delete("/{id}", [servicesController::class, 'destroy']);
+    });
 });

@@ -17,13 +17,18 @@
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="tables-general.php">
+                    <a href="{{ route('services.create') }}">
                         <i class="bi bi-circle"></i><span>Add Services</span>
                     </a>
                 </li>
                 <li>
-                    <a href="tables-data.php">
+                    <a href="{{ route('services.index') }}">
                         <i class="bi bi-circle"></i><span>List Services</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('services.lastactivity') }}">
+                        <i class="bi bi-circle"></i><span>Last Activity</span>
                     </a>
                 </li>
             </ul>
@@ -36,12 +41,12 @@
             </a>
             <ul id="tables-nav2" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="tables-general.php">
+                    <a href="{{ route('category.create') }}">
                         <i class="bi bi-circle"></i><span>Add Category</span>
                     </a>
                 </li>
                 <li>
-                    <a href="tables-data.php">
+                    <a href="{{ route('category.index') }}">
                         <i class="bi bi-circle"></i><span>List Category</span>
                     </a>
                 </li>
@@ -55,7 +60,7 @@
             <ul id="tables-nav3" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
                 <li>
-                    <a href="tables-data.php">
+                    <a href="{{ route('user.listAll') }}">
                         <i class="bi bi-circle"></i><span>List Users</span>
                     </a>
                 </li>
