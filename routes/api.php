@@ -17,7 +17,7 @@ Route::prefix("user")->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::get("logout", [ApiauthController::class, 'logout']);
-
+    Route::get("user/update", [ApiauthController::class, 'update']);
     Route::prefix("commint")->group(function () {
         // get All
         Route::get("/", [CommintController::class, 'index']);
