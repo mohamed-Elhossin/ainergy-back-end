@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2023 at 04:10 AM
+-- Generation Time: Jun 13, 2023 at 05:48 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -69,7 +69,9 @@ CREATE TABLE `caregories` (
 
 INSERT INTO `caregories` (`id`, `title`, `image`, `description`, `created_at`, `updated_at`) VALUES
 (1, 'Male clothis', '1685914665Screenshot_8.png', 'you can print all clotheis here', '2023-06-04 18:13:16', '2023-06-04 18:37:45'),
-(6, 'assss', '1685917366mohamedElhossiny.jpg', 'ssssss', '2023-06-04 19:22:46', '2023-06-04 19:22:46');
+(7, 'Females', '1686562596mohamedElhossiny.jpg', 'hello from first derive', '2023-06-12 06:36:36', '2023-06-12 06:36:36'),
+(8, 'Child', '1686562607impact-of-artificial-intelligence-in-software-development.png', 'fdsaf', '2023-06-12 06:36:47', '2023-06-12 06:36:47'),
+(9, 'convers', '1686562622mohamedElhossiny.jpg', 'hello from first derive', '2023-06-12 06:37:02', '2023-06-12 06:37:02');
 
 -- --------------------------------------------------------
 
@@ -115,6 +117,49 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `favoritecategories`
+-- (See below for the actual view)
+--
+CREATE TABLE `favoritecategories` (
+`id` bigint(20) unsigned
+,`userId` int(11)
+,`category1` int(11)
+,`category2` int(11)
+,`category3` int(11)
+,`created_at` timestamp
+,`updated_at` timestamp
+,`category1_name` varchar(255)
+,`category2_name` varchar(255)
+,`category3_name` varchar(255)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favorites`
+--
+
+CREATE TABLE `favorites` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `userId` int(11) NOT NULL,
+  `category1` int(11) NOT NULL,
+  `category2` int(11) NOT NULL,
+  `category3` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `favorites`
+--
+
+INSERT INTO `favorites` (`id`, `userId`, `category1`, `category2`, `category3`, `created_at`, `updated_at`) VALUES
+(1, 1, 7, 8, 9, '2023-06-12 06:38:37', '2023-06-12 06:38:37'),
+(2, 4, 7, 8, 9, '2023-06-12 07:02:54', '2023-06-12 07:02:54');
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `joincommints`
 -- (See below for the actual view)
 --
@@ -149,6 +194,30 @@ CREATE TABLE `joinserviceswithcategory` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `likes`
+--
+
+CREATE TABLE `likes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `status` int(11) DEFAULT 0,
+  `userId` int(11) NOT NULL,
+  `servicesId` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `likes`
+--
+
+INSERT INTO `likes` (`id`, `status`, `userId`, `servicesId`, `created_at`, `updated_at`) VALUES
+(1, 1, 4, 9, '2023-06-12 05:17:44', '2023-06-12 05:38:22'),
+(2, 1, 1, 9, '2023-06-12 05:23:13', '2023-06-12 05:23:13'),
+(5, 1, 3, 9, '2023-06-12 05:38:14', '2023-06-12 05:38:14');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -170,7 +239,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2023_5_24_000000_create_admins_table', 2),
 (6, '2023_06_04_202127_create_services_table', 3),
 (7, '2023_06_04_202544_create_caregories_table', 3),
-(8, '2023_06_04_202639_create_commints_table', 3);
+(8, '2023_06_04_202639_create_commints_table', 3),
+(9, '2023_06_12_080458_create_likes_table', 4),
+(10, '2023_06_12_091313_create_favorites_table', 5);
 
 -- --------------------------------------------------------
 
@@ -215,8 +286,8 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `expires_at`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(2, 'App\\Models\\User', 3, 'myToken', '7612e368f9c359689ed0aa64adb534ae33e7a273fd1e76c1da4e03f1e3f69a6e', '[\"*\"]', NULL, '2023-06-08 21:09:52', '2023-06-08 21:08:34', '2023-06-08 21:09:52'),
-(3, 'App\\Models\\User', 4, 'myToken', '68f1e5947734d4110d1449c98d4875c129f956a8e3e310d60df0fc50c8680928', '[\"*\"]', NULL, NULL, '2023-06-08 21:13:15', '2023-06-08 21:13:15');
+(3, 'App\\Models\\User', 4, 'myToken', '68f1e5947734d4110d1449c98d4875c129f956a8e3e310d60df0fc50c8680928', '[\"*\"]', NULL, NULL, '2023-06-08 21:13:15', '2023-06-08 21:13:15'),
+(5, 'App\\Models\\User', 3, 'myToken', 'c43b60768e36a662472f038e3a82f7f50d1d58393ece1da46ada34c67b7a4591', '[\"*\"]', NULL, '2023-06-12 07:05:22', '2023-06-12 04:52:36', '2023-06-12 07:05:22');
 
 -- --------------------------------------------------------
 
@@ -246,8 +317,7 @@ INSERT INTO `services` (`id`, `title`, `image`, `description`, `vendor`, `catego
 (14, 'dsafd', '1686263271mohamedElhossiny.jpg', 'fdsafdwsa', 1, 1, '2023-06-08 19:27:51', '2023-06-08 19:27:51'),
 (15, 'fdsaf', '1686263277mohamedElhossiny.jpg', 'sdaf', 1, 1, '2023-06-08 19:27:57', '2023-06-08 19:27:57'),
 (16, 'fdsafdsaf', '1686263285mohamedElhossiny.jpg', 'dsafdsa', 1, 1, '2023-06-08 19:28:05', '2023-06-08 19:28:05'),
-(17, 'DFS', '1686263439mohamedElhossiny.jpg', 'DSAFD', 1, 1, '2023-06-08 19:30:39', '2023-06-08 19:30:39'),
-(18, 'AFDS', '1686263456mohamedElhossiny.jpg', 'AFDSAF', 1, 6, '2023-06-08 19:30:56', '2023-06-08 19:30:56');
+(17, 'DFS', '1686263439mohamedElhossiny.jpg', 'DSAFD', 1, 1, '2023-06-08 19:30:39', '2023-06-08 19:30:39');
 
 -- --------------------------------------------------------
 
@@ -273,8 +343,17 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `type`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'toma', 'm.m.m.elhossin@gmail.com', NULL, '$2y$10$VQesjZGY8/9Qk2kd7FX8tuR4THwc6bKGFg7oDJ.SXPrq7fLN0kLY2', 'user', NULL, '2023-05-23 16:06:24', '2023-05-23 16:06:24'),
-(3, 'mohamed from Post Man', 'm.Elhossin@gmail.com', NULL, '$2y$10$MvbSb1bp69r3YiVKOwkrPOZ0WGUENkaeKF4bTCPYpDC9pOR7bNWAW', 'vendor', NULL, '2023-06-08 21:06:58', '2023-06-08 21:06:58'),
+(3, 'update mohamed', 'm.m.elhossin@gmail.com', NULL, '$2y$10$WvfNF1opKCOOaFNqJKUgPOZAhXHBt61gHUhgMvVj4gg0UlcnyWN5i', 'user', NULL, '2023-06-08 21:06:58', '2023-06-12 04:55:05'),
 (4, 'mohamed from Post Man', 'm.slhossin@gmail.com', NULL, '$2y$10$p53VIxKpXK7UyRX4PO/eXu/NeJLlYImmOWmYMfQUvMR.PsbG/ZXkK', 'user', NULL, '2023-06-08 21:13:15', '2023-06-08 21:13:15');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `favoritecategories`
+--
+DROP TABLE IF EXISTS `favoritecategories`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `favoritecategories`  AS SELECT `favorites`.`id` AS `id`, `favorites`.`userId` AS `userId`, `favorites`.`category1` AS `category1`, `favorites`.`category2` AS `category2`, `favorites`.`category3` AS `category3`, `favorites`.`created_at` AS `created_at`, `favorites`.`updated_at` AS `updated_at`, (select `caregories`.`title` from `caregories` where `caregories`.`id` = `favorites`.`category1`) AS `category1_name`, (select `caregories`.`title` from `caregories` where `caregories`.`id` = `favorites`.`category2`) AS `category2_name`, (select `caregories`.`title` from `caregories` where `caregories`.`id` = `favorites`.`category3`) AS `category3_name` FROM `favorites` ;
 
 -- --------------------------------------------------------
 
@@ -327,6 +406,24 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `favorites`
+--
+ALTER TABLE `favorites`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userId` (`userId`),
+  ADD KEY `category1` (`category1`),
+  ADD KEY `category2` (`category2`),
+  ADD KEY `category3` (`category3`);
+
+--
+-- Indexes for table `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userId` (`userId`),
+  ADD KEY `servicesId` (`servicesId`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -375,7 +472,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `caregories`
 --
 ALTER TABLE `caregories`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `commints`
@@ -390,16 +487,28 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `favorites`
+--
+ALTER TABLE `favorites`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `likes`
+--
+ALTER TABLE `likes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `services`
@@ -423,6 +532,22 @@ ALTER TABLE `users`
 ALTER TABLE `commints`
   ADD CONSTRAINT `commints_ibfk_1` FOREIGN KEY (`servicesId`) REFERENCES `services` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `commints_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `favorites`
+--
+ALTER TABLE `favorites`
+  ADD CONSTRAINT `favorites_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `favorites_ibfk_2` FOREIGN KEY (`category1`) REFERENCES `caregories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `favorites_ibfk_3` FOREIGN KEY (`category2`) REFERENCES `caregories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `favorites_ibfk_4` FOREIGN KEY (`category3`) REFERENCES `caregories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `likes`
+--
+ALTER TABLE `likes`
+  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`servicesId`) REFERENCES `services` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `services`
