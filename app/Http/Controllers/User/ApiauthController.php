@@ -33,6 +33,37 @@ class ApiauthController extends Controller
         ];
         return response($reponse, 200);
     }
+    public function update(Request $request,$id)
+    {
+        $data = $request->validate([
+            'name' => "required",
+            "email" => "required|unique:users,email,$id",
+            'password' => "required|confirmed",
+            'type' => "required"
+        ]);
+        $user = User::find($id); // Assuming you have the user's ID
+
+        if ($user) {
+            $user->name = $data['name'];
+            $user->email = $data['email'];
+            $user->password = bcrypt($data['password']);
+            $user->type = $data['type'];
+
+            $user->save();
+
+            // Update successful
+        } else {
+            // User not found
+            $reponse = "User Not Found";
+        }
+        $reponse = [
+            "Message" => " User Update Done",
+            'user' => $user,
+            "Status"=>200,
+        ];
+
+        return response($reponse, 200);
+    }
 
 
     public function login(Request $request)
