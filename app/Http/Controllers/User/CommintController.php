@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\APIs;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,19 +9,8 @@ use App\Models\views\Joincommints;
 class CommintController extends Controller
 {
 
-    // Commint with Service ID
-    public function index()
-    {
-        $commint = Joincommints::all();
-        $response = [
-            "message" => "Send All commints",
-            "Data" => $commint,
-            "Status" => 200
-        ];
-        return response($response, 200);
-    }
 
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
 
         $request->validate([
@@ -29,16 +18,12 @@ class CommintController extends Controller
         ]);
         $commint = new Commint();
         $commint->description = $request->description;
-        $commint->userId = $request->userId;
-        $commint->servicesId = $request->servicesId;
+        $commint->userId = auth()->user()->id;
+        $commint->servicesId = $id;
         $commint->save();
 
-        $response = [
-            "message" => "Create Commint ",
-            "Data" => $commint,
-            "Status" => 201
-        ];
-        return response($response, 201);
+
+        return redirect()->back() ;
     }
 
 

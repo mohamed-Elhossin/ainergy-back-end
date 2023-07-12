@@ -1,44 +1,67 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
-use App\Models\Service;
-use App\Models\Caregory;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use App\Models\Commint;
 use App\Models\views\Joinserviceswithcategory;
-use Illuminate\Support\Facades\File;
+use App\Models\Caregory;
+use App\Models\Service;
+use App\Models\Commint;
+use App\Models\views\Joincommints;
+use App\Models\Like;
+
 class ServicesController extends Controller
 {
 
 
-    public function deleteall()
+    public function yourServices()
     {
-        // Commint::truncate();
-        Service::query()->delete();
-        // Get all files in the folder
-        $files = File::files(public_path('upload/services'));
+        $vendorId =  auth()->user()->id;
+        $Services = Joinserviceswithcategory::where("vendorId", "=", $vendorId)->get();
+        return view('userUI.services.yourServices')->with("services", $Services);
+    }
+    public function createServices()
+    {
+        $category = Caregory::all();
+        return view("userUI.services.createServices", compact('category'));
+    }
 
-        // Loop through each file and delete it
-        foreach ($files as $file) {
-            File::delete($file);
-        }
-        // Optionally, you can add some feedback or redirect to another page
-        return redirect()->back()->with('success', 'All records have been deleted.');
+    public function allServices()
+    {
+        $Services = Joinserviceswithcategory::all();
+        return view('userUI.services.allservices')->with("services", $Services);
     }
     public function listServiceByCategory($id)
     {
         $Services = Joinserviceswithcategory::where("categoryId", "=", $id)->get();
-        return view('adminUI.services.listServicesbyCategory')->with("services", $Services);
+        return view('userUI.services.listbycategory')->with("services", $Services);
     }
     public function joinData()
     {
         $Services = Joinserviceswithcategory::paginate(10);
-        // return $Services;
         return view('adminUI.services.index')->with("services", $Services);
     }
+
+
+
+    public function show($id)
+    {
+        $likeCount =  Like::where('servicesId', $id)
+            ->where('status', 1)
+            ->count();
+
+        $userId = auth()->user()->id;
+        $likeStatus =  Like::where('userId', $userId)
+            ->where('servicesId', $id)->first();
+
+
+        $commints = Joincommints::where("servicesId", $id)->get();
+        $services = Joinserviceswithcategory::where('servId', $id)->first();
+        return view('userUI.services.show', compact("services", "commints", "likeCount", 'likeStatus'));
+    }
+
 
     public function create()
     {
@@ -65,9 +88,12 @@ class ServicesController extends Controller
         $drive_name = time() . $drive_data->getClientOriginalName();
         $location = public_path('./upload/services');
         $drive_data->move($location, $drive_name);
+
         $Service->image = $drive_name;
+
         $Service->category   = $request->category;
-        $Service->vendor = 1;
+
+        $Service->vendor = auth()->user()->id;
         $Service->save();
         return redirect()->back()->with("done", "Save services Done");
     }

@@ -26,23 +26,49 @@
 
                   @endguest
                   @auth
+                      <li><a class="nav-link scrollto " href="{{ route('user.category') }}#category">Categories</a></li>
+                      <li><a class="nav-link scrollto " href="{{ route('user.allServices') }}#services">All Services</a>
+                      </li>
 
-                  <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
+                      @if (Auth::user()->type == 'vendor')
+                          @if (Auth::user()->status == 'active')
+                              <li class="dropdown"><a href="#"> Services
+                                      <i class="bi bi-chevron-down"></i></a>
+                                  <ul>
+                                      <li><a class="nav-link scrollto"
+                                              href="{{ route('services.yourServices') }}#services">
+                                              Your Services</a>
+                                      </li>
+                                      <li><a class="nav-link scrollto"
+                                              href="{{ route('services.createPage') }}#createServices">
+                                              Create Services</a>
+                                      </li>
+                                  </ul>
+                              </li>
+                          @else
+                              <li class="dropdown text-danger "><a @disabled(true)> Not Active
+                                   </a>
+                              </li>
+                          @endif
+                      @endif
+
+
+                      <li class="nav-item dropdown">
+                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                              {{ Auth::user()->name }}
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="{{ route('logout') }}"
+                                  onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
-                </li>
+                                  {{ __('Logout') }}
+                              </a>
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                  @csrf
+                              </form>
+                          </div>
+                      </li>
 
 
                   @endauth

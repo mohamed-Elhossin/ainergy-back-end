@@ -11,6 +11,8 @@
         <h1 class="text-center text-success">List Services Page </h1>
         <div class="card">
             <div class="card-body">
+                <a href="{{ route('services.deleteall') }}" onclick="return confirm('Are You Sure ? ')"
+                    class="btn btn-danger my-3"> Delete All </a>
                 <table class="table table-lgiht">
                     <tr>
                         <th> ID</th>
@@ -27,7 +29,8 @@
                             <td> {{ $item->servId }} </td>
                             <td> {{ $item->servTitle }} </td>
                             <td> {{ $item->servDescription }} </td>
-                            <td> <img width="30" src="{{ asset("upload/services/$item->servImage") }}" alt=""> </td>
+                            <td> <img width="30" src="{{ asset("upload/services/$item->servImage") }}" alt="">
+                            </td>
 
                             <td> {{ $item->vendorName }} </td>
                             <td> {{ $item->categoryTitle }} </td>
@@ -52,5 +55,4 @@
 
         </div>
     </div>
-
 @endsection

@@ -7,9 +7,10 @@
 
     <title>Ainergy </title>
     <meta content="" name="description">
-    <meta content="" name="keywords")}}">
+    <meta content="" name="keywords">
 
-
+    <link rel="icon" href="{{ asset('img/logo.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('img/logo.png') }}">
 
     <!-- Google Fonts -->
     <link

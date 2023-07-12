@@ -64,7 +64,13 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-
+                        <div class="row mb-3">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">Type Of Registration</label>
+                            <div class="col-md-6 mt-2">
+                               User   <input  type="radio"  value="user"    name="type"  >
+                              Vendor  <input  type="radio"  value="vendor"  name="type"  >
+                            </div>
+                        </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

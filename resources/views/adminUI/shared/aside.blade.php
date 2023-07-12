@@ -74,7 +74,7 @@
             <ul id="tables-nav4" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
                 <li>
-                    <a href="tables-data.php">
+                    <a href="{{ route("user.vendor") }}">
                         <i class="bi bi-circle"></i><span>List Vendors</span>
                     </a>
                 </li>

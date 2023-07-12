@@ -348,30 +348,6 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ty
 
 -- --------------------------------------------------------
 
---
--- Structure for view `favoritecategories`
---
-DROP TABLE IF EXISTS `favoritecategories`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `favoritecategories`  AS SELECT `favorites`.`id` AS `id`, `favorites`.`userId` AS `userId`, `favorites`.`category1` AS `category1`, `favorites`.`category2` AS `category2`, `favorites`.`category3` AS `category3`, `favorites`.`created_at` AS `created_at`, `favorites`.`updated_at` AS `updated_at`, (select `caregories`.`title` from `caregories` where `caregories`.`id` = `favorites`.`category1`) AS `category1_name`, (select `caregories`.`title` from `caregories` where `caregories`.`id` = `favorites`.`category2`) AS `category2_name`, (select `caregories`.`title` from `caregories` where `caregories`.`id` = `favorites`.`category3`) AS `category3_name` FROM `favorites` ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `joincommints`
---
-DROP TABLE IF EXISTS `joincommints`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `joincommints`  AS SELECT `commints`.`id` AS `id`, `commints`.`description` AS `description`, `commints`.`userId` AS `userId`, `commints`.`servicesId` AS `servicesId`, `users`.`name` AS `userName`, `services`.`title` AS `serviceTitle`, `commints`.`created_at` AS `created_at` FROM ((`commints` join `services` on(`commints`.`servicesId` = `services`.`id`)) join `users` on(`commints`.`userId` = `users`.`id`)) ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `joinserviceswithcategory`
---
-DROP TABLE IF EXISTS `joinserviceswithcategory`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `joinserviceswithcategory`  AS SELECT `services`.`id` AS `servId`, `services`.`title` AS `servTitle`, `services`.`image` AS `servImage`, `services`.`description` AS `servDescription`, `services`.`vendor` AS `vendorId`, `services`.`category` AS `categoryId`, `caregories`.`title` AS `categoryTitle`, `users`.`name` AS `vendorName`, `services`.`created_at` AS `Servcreated_at` FROM ((`services` join `caregories` on(`services`.`category` = `caregories`.`id`)) join `users` on(`services`.`vendor` = `users`.`id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -560,3 +536,24 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+--
+-- Structure for view `favoritecategories`
+--
+CREATE VIEW `favoritecategories`
+AS SELECT `favorites`.`id` AS `id`, `favorites`.`userId` AS `userId`, `favorites`.`category1` AS `category1`, `favorites`.`category2` AS `category2`, `favorites`.`category3` AS `category3`, `favorites`.`created_at` AS `created_at`, `favorites`.`updated_at` AS `updated_at`, (select `caregories`.`title` from `caregories` where `caregories`.`id` = `favorites`.`category1`) AS `category1_name`, (select `caregories`.`title` from `caregories` where `caregories`.`id` = `favorites`.`category2`) AS `category2_name`, (select `caregories`.`title` from `caregories` where `caregories`.`id` = `favorites`.`category3`) AS `category3_name` FROM `favorites` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `joincommints`
+--
+CREATE VIEW `joincommints`  AS SELECT `commints`.`id` AS `id`, `commints`.`description` AS `description`, `commints`.`userId` AS `userId`, `commints`.`servicesId` AS `servicesId`, `users`.`name` AS `userName`, `services`.`title` AS `serviceTitle`, `commints`.`created_at` AS `created_at` FROM ((`commints` join `services` on(`commints`.`servicesId` = `services`.`id`)) join `users` on(`commints`.`userId` = `users`.`id`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `joinserviceswithcategory`
+--
+CREATE VIEW `joinserviceswithcategory`  AS SELECT `services`.`id` AS `servId`, `services`.`title` AS `servTitle`, `services`.`image` AS `servImage`, `services`.`description` AS `servDescription`, `services`.`vendor` AS `vendorId`, `services`.`category` AS `categoryId`, `caregories`.`title` AS `categoryTitle`, `users`.`name` AS `vendorName`, `services`.`created_at` AS `Servcreated_at` FROM ((`services` join `caregories` on(`services`.`category` = `caregories`.`id`)) join `users` on(`services`.`vendor` = `users`.`id`)) ;

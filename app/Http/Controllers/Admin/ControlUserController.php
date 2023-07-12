@@ -9,10 +9,15 @@ use App\Http\Controllers\Controller;
 class ControlUserController extends Controller
 {
 
+    public function vendor()
+    {
+        $User = User::where('type', 'vendor')->get();
+        return view('adminUI.users.vendor')->with("User", $User);
+    }
     public function index()
     {
-        $User = User::all();
-        return view('adminUI.users.index')->with("User",$User );
+        $User = User::where('type', 'user')->get();
+        return view('adminUI.users.index')->with("User", $User);
     }
     public function destroy($id)
     {
@@ -22,5 +27,19 @@ class ControlUserController extends Controller
         // unlink($filePathName);
         $User->delete();
         return redirect()->route('user.listAll')->with("done", "Deleted User Done");
+    }
+
+    public function  changeVendorStatus($id)
+    {
+        $User =  User::find($id);
+        if ($User->status == "noActive") {
+            $User->status = "active";
+            $User->save();
+        } else {
+            $User->status = "noActive";
+            $User->save();
+        }
+
+        return redirect()->back()->with("done", "Change Status Done ");
     }
 }
