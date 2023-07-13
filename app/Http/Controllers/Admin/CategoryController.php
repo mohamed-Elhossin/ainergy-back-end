@@ -34,6 +34,7 @@ class CategoryController extends Controller
         $Caregory = new Caregory();
         $Caregory->title = $request->title;
         $Caregory->description = $request->description;
+        $Caregory->icon = $request->icon;
         // File Code
         $drive_data =  $request->file("inputFile");
         $drive_name = time() . $drive_data->getClientOriginalName();

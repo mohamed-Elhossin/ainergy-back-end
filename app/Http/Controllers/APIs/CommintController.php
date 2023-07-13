@@ -10,11 +10,11 @@ class CommintController extends Controller
 {
 
     // Commint with Service ID
-    public function index()
+    public function index($id)
     {
-        $commint = Joincommints::all();
+        $commint = Joincommints::where("servicesId",$id)->get();
         $response = [
-            "message" => "Send All commints",
+            "message" => "Send All commints On Service $id",
             "Data" => $commint,
             "Status" => 200
         ];

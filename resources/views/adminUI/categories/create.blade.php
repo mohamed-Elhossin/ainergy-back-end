@@ -37,6 +37,10 @@
                         <input type="file" name="inputFile" class="form-control">
                     </div>
                     <div class="form-group">
+                        <label> Category Icon ( SVG Icon) .. optional </label>
+                        <input type="Text" name="icon" class="form-control">
+                    </div>
+                    <div class="form-group">
                         <div class="d-grid">
                             <button class="btn btn-info"> Save </button>
                         </div>

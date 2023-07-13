@@ -9,56 +9,44 @@ use App\Models\Like;
 class LikeController extends Controller
 {
 
-    public function index($id)
+    public function store(Request $request, $ServicesId)
     {
-        $likeCount =  Like::where('servicesId', 9)
-            ->where('status', 1)
-            ->count();
-        $response = [
-            "message" => "Send All Likes",
-            "Count" => $likeCount,
-            "ServiceId" => $id,
-            "Status" => 200
-        ];
-        return response($response, 200);
-    }
+        $userId =  $request->userId;
 
-    public function store(Request $request)
-    {
+        $ifLikeHava = Like::where("userId", $userId)->where("servicesId", $ServicesId)->first();
 
-        $like = new Like();
-        $like->status = $request->status;
-        $like->userId = $request->userId;
-        $like->servicesId = $request->servicesId;
-        $like->save();
-
-        $response = [
-            "message" => "Create like ",
-            "Data" => $like,
-            "Status" => 201
-        ];
-        return response($response, 201);
-    }
-
-    public function update(Request $request, $id)
-    {
-
-        $like = Like::find($id);
-        if ($like->status == 1) {
-            $like->status = 0;
+        if ($ifLikeHava != null) {
+            if ($ifLikeHava->status == 1) {
+                $ifLikeHava->status = 0;
+                $ifLikeHava->save();
+                $response = [
+                    "message" => "Update Like Done",
+                    "Data" => $ifLikeHava,
+                    "Status" => 200
+                ];
+                return response($response, 200);
+            } else {
+                $ifLikeHava->status = 1;
+                $ifLikeHava->save();
+                $response = [
+                    "message" => "Update Like Done",
+                    "Data" => $ifLikeHava,
+                    "Status" => 200
+                ];
+                return response($response, 200);
+            }
         } else {
+            $like = new Like();
             $like->status = 1;
+            $like->userId = $request->userId;
+            $like->servicesId = $ServicesId;
+            $like->save();
+            $response = [
+                "message" => "Send Like Done",
+                "Data" => $like,
+                "Status" => 200
+            ];
+            return response($response, 200);
         }
-
-        $like->userId = $request->userId;
-        $like->servicesId = $request->servicesId;
-        $like->save();
-
-        $response = [
-            "message" => "Update like ",
-            "Data" => $like,
-            "Status" => 201
-        ];
-        return response($response, 201);
     }
 }

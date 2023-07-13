@@ -2,14 +2,44 @@
 
 namespace App\Http\Controllers\APIs;
 
+use App\Models\Like;
 use App\Models\Service;
 use App\Models\Caregory;
 use Illuminate\Http\Request;
+use App\Models\views\Joincommints;
 use App\Http\Controllers\Controller;
 use App\Models\views\Joinserviceswithcategory;
 
 class servicesController extends Controller
 {
+    // /Show one Services With All Data Commint And likes
+    public function showOne($id)
+    {
+        $likeCount =  Like::where('servicesId', $id)
+            ->where('status', 1)
+            ->count();
+
+        $userId = auth()->user()->id;
+        $likeStatus =  Like::where('userId', $userId)
+            ->where('servicesId', $id)->first();
+
+
+        $commints = Joincommints::where("servicesId", $id)->get();
+        $services = Joinserviceswithcategory::where('servId', $id)->first();
+        $response = [
+            "message" => "Send One services",
+            "Data" => [
+                "services"=>$services,
+                "likeCount"=>$likeCount,
+                "commints"=>$commints
+            ],
+            "Status" => 200
+        ];
+        return response($response, 200);
+
+        // return view('userUI.services.show', compact("services", "commints", "likeCount", 'likeStatus'));
+    }
+
     public function listServiceByCategory($id)
     {
         $Services = Joinserviceswithcategory::where("categoryId", "=", $id)->get();

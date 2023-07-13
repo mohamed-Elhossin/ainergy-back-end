@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2023 at 05:48 AM
+-- Generation Time: Jul 13, 2023 at 03:57 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -59,6 +59,7 @@ CREATE TABLE `caregories` (
   `title` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
+  `icon` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -67,11 +68,11 @@ CREATE TABLE `caregories` (
 -- Dumping data for table `caregories`
 --
 
-INSERT INTO `caregories` (`id`, `title`, `image`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'Male clothis', '1685914665Screenshot_8.png', 'you can print all clotheis here', '2023-06-04 18:13:16', '2023-06-04 18:37:45'),
-(7, 'Females', '1686562596mohamedElhossiny.jpg', 'hello from first derive', '2023-06-12 06:36:36', '2023-06-12 06:36:36'),
-(8, 'Child', '1686562607impact-of-artificial-intelligence-in-software-development.png', 'fdsaf', '2023-06-12 06:36:47', '2023-06-12 06:36:47'),
-(9, 'convers', '1686562622mohamedElhossiny.jpg', 'hello from first derive', '2023-06-12 06:37:02', '2023-06-12 06:37:02');
+INSERT INTO `caregories` (`id`, `title`, `image`, `description`, `icon`, `created_at`, `updated_at`) VALUES
+(1, 'Male clothis', '1685914665Screenshot_8.png', 'you can print all clotheis here', '<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"1em\" viewBox=\"0 0 320 512\"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d=\"M148.7 4.7c6.2-6.2 16.4-6.2 22.6 0l64 64c4.6 4.6 5.9 11.5 3.5 17.4s-8.3 9.9-14.8 9.9H184v24h32c13.3 0 24 10.7 24 24s-10.7 24-24 24H184v24c0 .6 0 1.2-.1 1.8c77 11.6 136.1 78 136.1 158.2c0 88.4-71.6 160-160 160S0 440.4 0 352c0-80.2 59.1-146.7 136.1-158.2c0-.6-.1-1.2-.1-1.8V168H104c-13.3 0-24-10.7-24-24s10.7-24 24-24h32V96H96c-6.5 0-12.3-3.9-14.8-9.9s-1.1-12.9 3.5-17.4l64-64zM256 352A96 96 0 1 0 64 352a96 96 0 1 0 192 0z\"/></svg>', '2023-06-04 18:13:16', '2023-06-04 18:37:45'),
+(7, 'Females', '1686562596mohamedElhossiny.jpg', 'hello from first derive', '<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"1em\" viewBox=\"0 0 384 512\"><path d=\"M80 176a112 112 0 1 1 224 0A112 112 0 1 1 80 176zM224 349.1c81.9-15 144-86.8 144-173.1C368 78.8 289.2 0 192 0S16 78.8 16 176c0 86.3 62.1 158.1 144 173.1V384H128c-17.7 0-32 14.3-32 32s14.3 32 32 32h32v32c0 17.7 14.3 32 32 32s32-14.3 32-32V448h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H224V349.1z\"/></svg>', '2023-06-12 06:36:36', '2023-06-12 06:36:36'),
+(8, 'Child', '1686562607impact-of-artificial-intelligence-in-software-development.png', 'fdsaf', '<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"1em\" viewBox=\"0 0 320 512\"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d=\"M96 64a64 64 0 1 1 128 0A64 64 0 1 1 96 64zm48 320v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V287.8L59.1 321c-9.4 15-29.2 19.4-44.1 10S-4.5 301.9 4.9 287l39.9-63.3C69.7 184 113.2 160 160 160s90.3 24 115.2 63.6L315.1 287c9.4 15 4.9 34.7-10 44.1s-34.7 4', '2023-06-12 06:36:47', '2023-06-12 06:36:47'),
+(12, 'child', '1689256482Screenshot_2.png', 'hello', 'Warning: #1265 Data truncated for column &#039;icon&#039; at row 1', '2023-07-13 10:54:42', '2023-07-13 10:54:42');
 
 -- --------------------------------------------------------
 
@@ -93,10 +94,8 @@ CREATE TABLE `commints` (
 --
 
 INSERT INTO `commints` (`id`, `description`, `userId`, `servicesId`, `created_at`, `updated_at`) VALUES
-(1, 'First cmmmints', 1, 9, '2023-06-08 20:43:25', '2023-06-08 20:43:25'),
-(2, 'First cmmmints', 1, 9, '2023-06-08 20:48:28', '2023-06-08 20:48:28'),
-(3, 'First cmmmints', 1, 9, '2023-06-08 20:48:29', '2023-06-08 20:48:29'),
-(4, 'First cmmmints', 1, 9, '2023-06-08 20:48:30', '2023-06-08 20:48:30');
+(1, 'any commint', 10, 24, '2023-06-26 12:49:27', '2023-06-26 12:49:27'),
+(2, 'helllo', 1, 24, '2023-06-26 12:50:05', '2023-06-26 12:50:05');
 
 -- --------------------------------------------------------
 
@@ -148,14 +147,6 @@ CREATE TABLE `favorites` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `favorites`
---
-
-INSERT INTO `favorites` (`id`, `userId`, `category1`, `category2`, `category3`, `created_at`, `updated_at`) VALUES
-(1, 1, 7, 8, 9, '2023-06-12 06:38:37', '2023-06-12 06:38:37'),
-(2, 4, 7, 8, 9, '2023-06-12 07:02:54', '2023-06-12 07:02:54');
 
 -- --------------------------------------------------------
 
@@ -211,9 +202,7 @@ CREATE TABLE `likes` (
 --
 
 INSERT INTO `likes` (`id`, `status`, `userId`, `servicesId`, `created_at`, `updated_at`) VALUES
-(1, 1, 4, 9, '2023-06-12 05:17:44', '2023-06-12 05:38:22'),
-(2, 1, 1, 9, '2023-06-12 05:23:13', '2023-06-12 05:23:13'),
-(5, 1, 3, 9, '2023-06-12 05:38:14', '2023-06-12 05:38:14');
+(11, 0, 1, 24, '2023-06-26 12:50:11', '2023-07-12 08:56:57');
 
 -- --------------------------------------------------------
 
@@ -287,7 +276,8 @@ CREATE TABLE `personal_access_tokens` (
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `expires_at`, `last_used_at`, `created_at`, `updated_at`) VALUES
 (3, 'App\\Models\\User', 4, 'myToken', '68f1e5947734d4110d1449c98d4875c129f956a8e3e310d60df0fc50c8680928', '[\"*\"]', NULL, NULL, '2023-06-08 21:13:15', '2023-06-08 21:13:15'),
-(5, 'App\\Models\\User', 3, 'myToken', 'c43b60768e36a662472f038e3a82f7f50d1d58393ece1da46ada34c67b7a4591', '[\"*\"]', NULL, '2023-06-12 07:05:22', '2023-06-12 04:52:36', '2023-06-12 07:05:22');
+(5, 'App\\Models\\User', 3, 'myToken', 'c43b60768e36a662472f038e3a82f7f50d1d58393ece1da46ada34c67b7a4591', '[\"*\"]', NULL, '2023-06-12 07:05:22', '2023-06-12 04:52:36', '2023-06-12 07:05:22'),
+(6, 'App\\Models\\User', 3, 'myToken', '3aaf5d7fba4742568a0928df706cb90842f345bb4ab7182cd27e2b1ffe1e1d9a', '[\"*\"]', NULL, '2023-07-12 08:57:02', '2023-07-12 08:46:27', '2023-07-12 08:57:02');
 
 -- --------------------------------------------------------
 
@@ -311,13 +301,7 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`id`, `title`, `image`, `description`, `vendor`, `category`, `created_at`, `updated_at`) VALUES
-(9, 'dasdsa', '1685949315mohamedElhossiny.jpg', 'dsadsadsa', 1, 1, '2023-06-05 04:15:15', '2023-06-05 04:15:15'),
-(11, 'ASSDAD', '1686034311mohamedElhossiny.jpg', 'hello from first derive', 1, 1, '2023-06-06 03:51:51', '2023-06-06 03:51:51'),
-(13, 'dsafd', '1686263270mohamedElhossiny.jpg', 'fdsafdwsa', 1, 1, '2023-06-08 19:27:50', '2023-06-08 19:27:50'),
-(14, 'dsafd', '1686263271mohamedElhossiny.jpg', 'fdsafdwsa', 1, 1, '2023-06-08 19:27:51', '2023-06-08 19:27:51'),
-(15, 'fdsaf', '1686263277mohamedElhossiny.jpg', 'sdaf', 1, 1, '2023-06-08 19:27:57', '2023-06-08 19:27:57'),
-(16, 'fdsafdsaf', '1686263285mohamedElhossiny.jpg', 'dsafdsa', 1, 1, '2023-06-08 19:28:05', '2023-06-08 19:28:05'),
-(17, 'DFS', '1686263439mohamedElhossiny.jpg', 'DSAFD', 1, 1, '2023-06-08 19:30:39', '2023-06-08 19:30:39');
+(24, 'for mohamed', '1687794469mohamedElhossiny.jpg', 'test tes', 10, 1, '2023-06-26 12:47:49', '2023-06-26 12:47:49');
 
 -- --------------------------------------------------------
 
@@ -332,6 +316,7 @@ CREATE TABLE `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `type` varchar(50) NOT NULL DEFAULT 'user',
+  `status` varchar(50) NOT NULL DEFAULT 'noActive',
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -341,13 +326,39 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `type`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'toma', 'm.m.m.elhossin@gmail.com', NULL, '$2y$10$VQesjZGY8/9Qk2kd7FX8tuR4THwc6bKGFg7oDJ.SXPrq7fLN0kLY2', 'user', NULL, '2023-05-23 16:06:24', '2023-05-23 16:06:24'),
-(3, 'update mohamed', 'm.m.elhossin@gmail.com', NULL, '$2y$10$WvfNF1opKCOOaFNqJKUgPOZAhXHBt61gHUhgMvVj4gg0UlcnyWN5i', 'user', NULL, '2023-06-08 21:06:58', '2023-06-12 04:55:05'),
-(4, 'mohamed from Post Man', 'm.slhossin@gmail.com', NULL, '$2y$10$p53VIxKpXK7UyRX4PO/eXu/NeJLlYImmOWmYMfQUvMR.PsbG/ZXkK', 'user', NULL, '2023-06-08 21:13:15', '2023-06-08 21:13:15');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `type`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'toma', 'm.m.m.elhossin@gmail.com', NULL, '$2y$10$VQesjZGY8/9Qk2kd7FX8tuR4THwc6bKGFg7oDJ.SXPrq7fLN0kLY2', 'vendor', 'noActive', NULL, '2023-05-23 16:06:24', '2023-06-27 15:38:00'),
+(3, 'update mohamed', 'm.m.elhossin@gmail.com', NULL, '$2y$10$WvfNF1opKCOOaFNqJKUgPOZAhXHBt61gHUhgMvVj4gg0UlcnyWN5i', 'user', 'noActive', NULL, '2023-06-08 21:06:58', '2023-06-12 04:55:05'),
+(4, 'mohamed from Post Man', 'm.slhossin@gmail.com', NULL, '$2y$10$p53VIxKpXK7UyRX4PO/eXu/NeJLlYImmOWmYMfQUvMR.PsbG/ZXkK', 'user', 'noActive', NULL, '2023-06-08 21:13:15', '2023-06-08 21:13:15'),
+(9, 'dsa', 'dsa@gmail.com', NULL, '$2y$10$JMTOb/vueV2V7wmsYY13u.zCNmQkP0taINHBwNe3HAFxcPgQzMERe', 'vendor', 'noActive', NULL, '2023-06-13 04:13:36', '2023-06-26 12:48:27'),
+(10, 'mohamed elhossiny', 'admin@gmail.com', NULL, '$2y$10$wTCCnvvSTnNhxN9E.IKVwe3vt5BBZAn.JbHAdCopraTQLvwSpKyue', 'vendor', 'noActive', NULL, '2023-06-26 12:45:53', '2023-06-26 12:45:53');
 
 -- --------------------------------------------------------
 
+--
+-- Structure for view `favoritecategories`
+--
+DROP TABLE IF EXISTS `favoritecategories`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `favoritecategories`  AS SELECT `favorites`.`id` AS `id`, `favorites`.`userId` AS `userId`, `favorites`.`category1` AS `category1`, `favorites`.`category2` AS `category2`, `favorites`.`category3` AS `category3`, `favorites`.`created_at` AS `created_at`, `favorites`.`updated_at` AS `updated_at`, (select `caregories`.`title` from `caregories` where `caregories`.`id` = `favorites`.`category1`) AS `category1_name`, (select `caregories`.`title` from `caregories` where `caregories`.`id` = `favorites`.`category2`) AS `category2_name`, (select `caregories`.`title` from `caregories` where `caregories`.`id` = `favorites`.`category3`) AS `category3_name` FROM `favorites` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `joincommints`
+--
+DROP TABLE IF EXISTS `joincommints`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `joincommints`  AS SELECT `commints`.`id` AS `id`, `commints`.`description` AS `description`, `commints`.`userId` AS `userId`, `commints`.`servicesId` AS `servicesId`, `users`.`name` AS `userName`, `services`.`title` AS `serviceTitle`, `commints`.`created_at` AS `created_at` FROM ((`commints` join `services` on(`commints`.`servicesId` = `services`.`id`)) join `users` on(`commints`.`userId` = `users`.`id`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `joinserviceswithcategory`
+--
+DROP TABLE IF EXISTS `joinserviceswithcategory`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `joinserviceswithcategory`  AS SELECT `services`.`id` AS `servId`, `services`.`title` AS `servTitle`, `services`.`image` AS `servImage`, `services`.`description` AS `servDescription`, `services`.`vendor` AS `vendorId`, `services`.`category` AS `categoryId`, `caregories`.`title` AS `categoryTitle`, `users`.`name` AS `vendorName`, `services`.`created_at` AS `Servcreated_at` FROM ((`services` join `caregories` on(`services`.`category` = `caregories`.`id`)) join `users` on(`services`.`vendor` = `users`.`id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -448,13 +459,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `caregories`
 --
 ALTER TABLE `caregories`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `commints`
 --
 ALTER TABLE `commints`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -472,7 +483,7 @@ ALTER TABLE `favorites`
 -- AUTO_INCREMENT for table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -484,19 +495,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -506,8 +517,8 @@ ALTER TABLE `users`
 -- Constraints for table `commints`
 --
 ALTER TABLE `commints`
-  ADD CONSTRAINT `commints_ibfk_1` FOREIGN KEY (`servicesId`) REFERENCES `services` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `commints_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `commints_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `commints_ibfk_3` FOREIGN KEY (`servicesId`) REFERENCES `services` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `favorites`
@@ -536,24 +547,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
---
--- Structure for view `favoritecategories`
---
-CREATE VIEW `favoritecategories`
-AS SELECT `favorites`.`id` AS `id`, `favorites`.`userId` AS `userId`, `favorites`.`category1` AS `category1`, `favorites`.`category2` AS `category2`, `favorites`.`category3` AS `category3`, `favorites`.`created_at` AS `created_at`, `favorites`.`updated_at` AS `updated_at`, (select `caregories`.`title` from `caregories` where `caregories`.`id` = `favorites`.`category1`) AS `category1_name`, (select `caregories`.`title` from `caregories` where `caregories`.`id` = `favorites`.`category2`) AS `category2_name`, (select `caregories`.`title` from `caregories` where `caregories`.`id` = `favorites`.`category3`) AS `category3_name` FROM `favorites` ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `joincommints`
---
-CREATE VIEW `joincommints`  AS SELECT `commints`.`id` AS `id`, `commints`.`description` AS `description`, `commints`.`userId` AS `userId`, `commints`.`servicesId` AS `servicesId`, `users`.`name` AS `userName`, `services`.`title` AS `serviceTitle`, `commints`.`created_at` AS `created_at` FROM ((`commints` join `services` on(`commints`.`servicesId` = `services`.`id`)) join `users` on(`commints`.`userId` = `users`.`id`)) ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `joinserviceswithcategory`
---
-CREATE VIEW `joinserviceswithcategory`  AS SELECT `services`.`id` AS `servId`, `services`.`title` AS `servTitle`, `services`.`image` AS `servImage`, `services`.`description` AS `servDescription`, `services`.`vendor` AS `vendorId`, `services`.`category` AS `categoryId`, `caregories`.`title` AS `categoryTitle`, `users`.`name` AS `vendorName`, `services`.`created_at` AS `Servcreated_at` FROM ((`services` join `caregories` on(`services`.`category` = `caregories`.`id`)) join `users` on(`services`.`vendor` = `users`.`id`)) ;

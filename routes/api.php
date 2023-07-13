@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post("user/update/{id}", [ApiauthController::class, 'update']);
     Route::prefix("commint")->group(function () {
         // get All
-        Route::get("/", [CommintController::class, 'index']);
+        Route::get("/{id}", [CommintController::class, 'index']);
         Route::post("/", [CommintController::class, 'store']);
         Route::delete("/{id}", [CommintController::class, 'destroy']);
     });
@@ -33,6 +33,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix("services")->group(function () {
         // get All
         Route::get("/", [servicesController::class, 'index']);
+        // get  Swho One Services With All Data
+        Route::get("all/{id}", [servicesController::class, 'showOne']);
         // get One Services
         Route::get("/{id}", [servicesController::class, 'show']);
         //  Get by Category ID
@@ -48,15 +50,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix("likes")->group(function () {
         // get All
         // number Of services Like by Services ID
-        Route::get("/{id}", [LikeController::class, 'index']);
-        Route::post("/", [LikeController::class, 'store']);
-        Route::post("/{id}", [LikeController::class, 'update']);
-
+        Route::post("/{id}", [LikeController::class, 'store']);
     });
     Route::prefix("favorite")->group(function () {
         // read Fav Categories By user ID
         Route::get("/{id}", [FavoriteController::class, 'index']);
         Route::post("/", [FavoriteController::class, 'store']);
     });
-
 });
